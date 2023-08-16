@@ -11,6 +11,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.Map;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -132,6 +135,26 @@ public class Homework1 extends HrTestBase {
         // - And Third link rel is "describedby"
         String rel = response.path("links[2].rel");
         assertEquals("describedby",rel);
+
+        // get link details
+
+        List<Map<String,String>> links = response.path("links");
+        System.out.println(links);
+        System.out.println("ALL LINKS ");
+        for (Map<String, String> each : links) {
+            System.out.println(each);
+        }
+        // get me last object of links rel information
+        Map<String, String> lastLinkMap = links.get(links.size() - 1);
+        System.out.println(lastLinkMap.get("rel"));
+
+        // get all rels by using response path
+        List<String> allRels = response.path("links.rel");
+        System.out.println(allRels);
+
+        // Find all href that endswith regions/1 by using links arraylist and stream
+
+
 
     }
 }
