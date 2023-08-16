@@ -1,6 +1,7 @@
 package com.cydeo.officeHours.week1.morning;
 
 
+import com.cydeo.utility.HrTestBase;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -13,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Homework1 {
+public class Homework1 extends HrTestBase {
 
 
 
@@ -38,7 +39,8 @@ public class Homework1 {
     @Test
     public void task1() {
 
-        Response response = given().accept(ContentType.JSON)
+        Response response = given().log().uri()
+                .accept(ContentType.JSON)
                 .when().get("/countries/US");
 
         response.prettyPrint();
