@@ -79,5 +79,31 @@ public class Homework1 extends HrTestBase {
     @Test
     public void task2() {
 
+        Response response = given().accept(ContentType.JSON).
+                when().get("/employees/1");
+
+        assertEquals(404,response.statusCode());
+
+
+    }
+
+    /*
+    Task 3 :
+        - Given accept type is Json
+        - And path param regionID value is 1
+        - When users sends request to /regions/{regionID}
+        - Then status code is 200
+        - And Content - Type is application/json
+        - And response countryname Europe
+        - And header should contains Date
+        - And Transfer-Encoding should be chunked
+     */
+
+    @Test
+    public void task3() {
+
+
+
+
     }
 }
