@@ -152,6 +152,7 @@ public class Homework1 extends HrTestBase {
         List<String> allRels = response.path("links.rel");
         System.out.println(allRels);
 
+
         // Find all href that endswith regions/1 by using links arraylist and stream
 
 
