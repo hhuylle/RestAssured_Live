@@ -1,10 +1,13 @@
 package com.cydeo.officeHours.week1.morning;
 
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
@@ -31,11 +34,12 @@ public class Homework1 {
 
      */
 
+
     @Test
     public void task1() {
 
         Response response = given().accept(ContentType.JSON)
-                .when().get("http://44.201.221.73:1000/ords/hr/countries/US");
+                .when().get("/countries/US");
 
         response.prettyPrint();
 
@@ -70,8 +74,8 @@ public class Homework1 {
 
      */
 
-
     @Test
     public void task2() {
+
     }
 }
