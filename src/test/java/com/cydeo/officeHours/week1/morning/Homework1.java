@@ -104,8 +104,34 @@ public class Homework1 extends HrTestBase {
     @Test
     public void task3() {
 
+        Response response = given().accept(ContentType.JSON).
+                pathParam("region_id",1).
+                when().get("/regions/{region_id}");
 
+        response.prettyPrint();
 
+        // - Then status code is 200
+        assertEquals(200,response.statusCode());
+
+        // - And Content - Type is application/json
+        assertEquals(ContentType.JSON.toString(),response.contentType());
+
+        // - And header should contains Date
+       assertTrue( response.headers().hasHeaderWithName("Date"));
+
+        // - And Transfer-Encoding should be chunked
+        assertEquals("chunked",response.getHeader("Transfer-Encoding"));
+
+        // - And response region_name Europe
+        String regionName = response.path("region_name");
+        System.out.println(regionName);
+        assertEquals("Europe",regionName);
+
+        assertEquals("Europe",response.path("region_name"));
+
+        // - And Third link rel is "describedby"
+        String rel = response.path("links[2].rel");
+        assertEquals("describedby",rel);
 
     }
 }
