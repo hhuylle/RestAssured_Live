@@ -94,9 +94,11 @@ public class Homework1 extends HrTestBase {
         - When users sends request to /regions/{regionID}
         - Then status code is 200
         - And Content - Type is application/json
-        - And response countryname Europe
-        - And header should contains Date
+         - And header should contains Date
         - And Transfer-Encoding should be chunked
+        - And response region_name Europe
+        - And Third link rel is "describedby"
+
      */
 
     @Test
