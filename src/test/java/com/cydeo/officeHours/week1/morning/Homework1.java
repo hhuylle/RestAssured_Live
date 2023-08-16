@@ -62,4 +62,16 @@ public class Homework1 {
 
 
     }
+    /*
+    Task 2 :
+    - Given accept type is Json
+    - When users sends request to /employees/1
+    - Then status code is 404
+
+     */
+
+
+    @Test
+    public void task2() {
+    }
 }
