@@ -48,4 +48,61 @@ public class HomeWork1 extends HrTestBase {
 
 
     }
+
+
+    /**
+     * Task 2 :
+     * - Given accept type is Json
+     * - When users sends request to /employees/1
+     * - Then status code is 404
+     */
+
+    @Test
+    void task2() {
+        Response response = RestAssured.given()
+                // .accept("application/json") // you can prefere one of them
+
+                .accept(ContentType.JSON)
+                .when()
+                .get("/employees/1");
+
+response.prettyPrint();
+
+//get the status code
+        int actualStatusCode = response.getStatusCode();
+
+      //  Assertions.assertEquals(404,actualStatusCode);
+        Assertions.assertEquals(HttpStatus.SC_NOT_FOUND,actualStatusCode);
+
+
+
+    }
+    /*
+    public Response getResponse(String endpoint){
+        Response response = RestAssured.given()
+                // .accept("application/json") // you can prefere one of them
+                .accept(ContentType.JSON)
+                .get(endpoint);
+
+        return response;
+    }
+
+     */
+
+/**
+ * Task 3 :
+ * - Given accept type is Json
+ * - When users sends request to /regions/1
+ * - Then status code is 200
+ * - And Content - Type is application/json
+ * - And response contains Europe
+ * - And header should contains Date
+ * - And Transfer-Encoding should be chunked
+ */
+
+
+
+
+
+
 }
