@@ -100,9 +100,38 @@ response.prettyPrint();
  * - And Transfer-Encoding should be chunked
  */
 
+@Test
+void task3() {
+
+    Response response = RestAssured.given()
+            // .accept("application/json") // you can prefere one of them
+            .accept(ContentType.JSON)
+            .get("/regions/1");
+
+    //get the status code
+
+    int actualStatusCode = response.statusCode();
+    Assertions.assertEquals(200,actualStatusCode);
+
+    //get the content type
+    String actualContentType = response.getContentType();
+
+    Assertions.assertEquals("application/json",actualContentType);
+
+    //get the body as String
+    String actualBody = response.body().asString();
+
+    Assertions.assertTrue(actualBody.contains("Europe"));
+
+    boolean hasHeaderWithDate = response.headers().hasHeaderWithName("Date");
+
+    Assertions.assertTrue(hasHeaderWithDate);
+
+//get the header value
+    String actualValueOfTransferEncoding = response.getHeader("Transfer-Encoding");
+
+    Assertions.assertEquals("chunked",actualValueOfTransferEncoding);
 
 
-
-
-
+}
 }
