@@ -1,8 +1,11 @@
 package com.cydeo.liveClass.week2;
 
+import com.cydeo.utility.FruitTestBase;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
-
-public class P02_QueryParam {
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+public class P02_QueryParam extends FruitTestBase {
 
     /**
      *1- Given accept type is Json
@@ -23,5 +26,22 @@ public class P02_QueryParam {
 
     @Test
     public  void getProducts() {
+
+
+
+        given().log().uri().accept(ContentType.JSON)
+                .queryParam("start",1)
+                .queryParam("limit",100)
+                .queryParam("search","Fruit").
+        when().get("/products").prettyPeek().
+        then()
+                .statusCode(200)
+                .contentType(ContentType.JSON);
+
+
+
+
+
+
     }
 }
