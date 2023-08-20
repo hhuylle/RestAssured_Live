@@ -63,4 +63,17 @@ public class P01_PathParam extends FruitTestBase {
         System.out.println(vName);
         Assertions.assertEquals("True Fruits Inc.",vName);
     }
+
+
+
+    @Test
+    public void getSingleProductJsonPath() {
+
+
+        Response response = given().log().uri().accept(ContentType.JSON) // send me data in JSON format
+                .pathParam("id", 4).
+                when().get("/products/{id}").prettyPeek();
+
+
+    }
 }
