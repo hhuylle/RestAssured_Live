@@ -36,10 +36,14 @@ public class P02_QueryParam extends FruitTestBase {
         when().get("/products").prettyPeek().
         then()
                 .statusCode(200)
-                .contentType(ContentType.JSON);
+                .contentType(ContentType.JSON)
+                .body("meta.limit",is(100))
+                .body("meta.start",is(1))
+                .body("products.name",everyItem(containsString("Fruit")));
 
 
-
+        //     *     - Get all product names
+        //     *     - Get product ids
 
 
 
