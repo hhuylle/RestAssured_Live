@@ -1,8 +1,11 @@
 package com.cydeo.liveClass.week2;
 
 import com.cydeo.utility.FruitTestBase;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 public class P04_Deserialization extends FruitTestBase {
     /**
      * Send request to FruitAPI url and save the response
@@ -27,5 +30,14 @@ public class P04_Deserialization extends FruitTestBase {
 
     @Test
     public void getCustomers() {
+
+        given().log().uri().accept(ContentType.JSON).
+        when().get("/customers").prettyPeek().
+        then().statusCode(200)
+                .contentType(ContentType.JSON);
+
+
+
+
     }
 }
