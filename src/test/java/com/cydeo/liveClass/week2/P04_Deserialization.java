@@ -5,10 +5,14 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -54,12 +58,32 @@ public class P04_Deserialization extends FruitTestBase {
 
 
         System.out.println("====== GET LIMIT ======");
+        System.out.println("meta.get(\"limit\") = " + meta.get("limit"));
 
         System.out.println("====== GET CUSTOMERS ======");
+        List<Map<String,Object>> allCustomers= (List<Map<String, Object>>) allData.get("customers");
+        System.out.println(allCustomers);
 
         System.out.println("====== GET FIRST CUSTOMER ======");
+        Map<String, Object> firstCustomer = allCustomers.get(0);
+        System.out.println(allCustomers.get(0));
+
+        System.out.println("====== PRINT FIRST CUSTOMER IDs ======");
+        System.out.println(firstCustomer.get("id"));
+        Assertions.assertEquals(6,firstCustomer.get("id"));
 
         System.out.println("====== PRINT CUSTOMERS IDs ======");
+        List<Integer> allIDs = allCustomers.stream().map(eachCustomer -> (Integer)eachCustomer.get("id")).collect(Collectors.toList());
+        System.out.println(allIDs);
+
+
+        // U can use for loop to get each customer IDS
+        List<Integer> allIds=new ArrayList<>();
+        for (Map<String, Object> eachCustomer : allCustomers) {
+
+            allIds.add((Integer)eachCustomer.get("id"));
+        }
+        System.out.println(allIds);
 
         System.out.println("====== PRINT CUSTOMERS Names ======");
 
