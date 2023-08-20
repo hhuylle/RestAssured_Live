@@ -1,8 +1,10 @@
 package com.cydeo.liveClass.week2;
 
+import com.cydeo.utility.FormulaTestBase;
 import org.junit.jupiter.api.Test;
 
-public class P05_DeserializationPOJO {
+import static io.restassured.RestAssured.*;
+public class P05_DeserializationPOJO extends FormulaTestBase {
 
         /*
         - ERGAST API
@@ -17,6 +19,11 @@ public class P05_DeserializationPOJO {
 
     @Test
     public void statusPOJO() {
+
+        given().log().uri().
+        when().get("/status.json").
+        then().statusCode(200)
+                .contentType("application/json; charset=utf-8");
 
     }
 }
