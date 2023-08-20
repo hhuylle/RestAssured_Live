@@ -90,6 +90,13 @@ public class P04_Deserialization extends FruitTestBase {
 
         System.out.println("====== PRINT CUSTOMERS Names ======");
 
+        List<String> allCustomersName=new ArrayList<>();
+        // allCustomers--> List<Map<String,Object>>
+        for (Map<String, Object> eachCustomer : allCustomers) {
+            Object name = eachCustomer.get("name");
+            allCustomersName.add((String)name);
+        }
+        System.out.println(allCustomersName);
 
     }
 }
