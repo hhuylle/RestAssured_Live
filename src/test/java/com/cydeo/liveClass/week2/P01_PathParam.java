@@ -43,17 +43,24 @@ public class P01_PathParam extends FruitTestBase {
         //     *     - Content Type is application/json
         Assertions.assertEquals("application/json",response.contentType());
         Assertions.assertEquals("application/json",response.getContentType());
-
         Assertions.assertEquals(ContentType.JSON.toString(),response.contentType());
         Assertions.assertEquals(ContentType.JSON.toString(),response.getContentType());
 
 
-
-        //     *     - Print response
         //     *     - id is 4
+        int id = response.path("id");
+        Assertions.assertEquals(4,id);
+
+        Assertions.assertEquals(4, (Integer) response.path("id"));
+
+
         //     *     - Name is "Coconut"
+        String name = response.path("name");
+        Assertions.assertEquals("Coconut",name);
+
         //     *     - Vendor name is "True Fruits Inc."
-
-
+        String vName = response.path("vendors[0].name");
+        System.out.println(vName);
+        Assertions.assertEquals("True Fruits Inc.",vName);
     }
 }
