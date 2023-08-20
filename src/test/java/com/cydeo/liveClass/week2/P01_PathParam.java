@@ -83,11 +83,9 @@ public class P01_PathParam extends FruitTestBase {
         //     *     - Content Type is application/json
         Assertions.assertEquals(ContentType.JSON.toString(),response.contentType());
 
-
         //     *     - id is 4
         int id = jp.getInt("id");
         Assertions.assertEquals(4,id);
-
         Assertions.assertEquals(4,jp.getInt("id"));
 
         //     *     - Name is "Coconut"
@@ -95,6 +93,19 @@ public class P01_PathParam extends FruitTestBase {
 
         //     *     - Vendor name is "True Fruits Inc."
         Assertions.assertEquals("True Fruits Inc.",jp.getString("vendors[0].name"));
+
+    }
+
+
+    @Test
+    public void getSingleProductwithHamCrest() {
+
+
+               given().log().uri().accept(ContentType.JSON) // send me data in JSON format
+                .pathParam("id", 4).
+                when().get("/products/{id}").prettyPeek();
+
+
 
     }
 }
