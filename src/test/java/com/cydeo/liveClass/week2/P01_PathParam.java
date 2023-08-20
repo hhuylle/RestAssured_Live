@@ -6,10 +6,12 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 
 public class P01_PathParam extends FruitTestBase {
     /**
@@ -102,10 +104,14 @@ public class P01_PathParam extends FruitTestBase {
 
 
                given().log().uri().accept(ContentType.JSON) // send me data in JSON format
-                .pathParam("id", 4).
-                when().get("/products/{id}").prettyPeek();
-
-
+                       .pathParam("id", 4).
+               when().get("/products/{id}").prettyPeek().
+               then()
+                       .statusCode(200)
+                       .contentType(ContentType.JSON)
+                       .body("id", is(4))
+                       .body("name",is("Coconut"))
+                       .body("vendors[0].name",is("True Fruits Inc."));
 
     }
 }
