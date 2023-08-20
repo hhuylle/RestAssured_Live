@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 
 import static io.restassured.RestAssured.*;
 
+
 public abstract class FruitTestBase {
 
     @BeforeAll
