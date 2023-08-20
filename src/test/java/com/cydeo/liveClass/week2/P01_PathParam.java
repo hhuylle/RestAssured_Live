@@ -114,4 +114,18 @@ public class P01_PathParam extends FruitTestBase {
                        .body("vendors[0].name",is("True Fruits Inc."));
 
     }
+
+
+    @Test
+    public void getSingleProductwithHamCrestPlusJsonPath() {
+
+
+        given().log().uri().accept(ContentType.JSON) // send me data in JSON format
+                .pathParam("id", 4).
+                when().get("/products/{id}").prettyPeek().
+                then()
+                .statusCode(200)
+                .contentType(ContentType.JSON);
+
+    }
 }
