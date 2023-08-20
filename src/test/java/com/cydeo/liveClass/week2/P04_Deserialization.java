@@ -78,12 +78,15 @@ public class P04_Deserialization extends FruitTestBase {
 
 
         // U can use for loop to get each customer IDS
-        List<Integer> allIds=new ArrayList<>();
-        for (Map<String, Object> eachCustomer : allCustomers) {
+        // allCustomers--> List<Map<String,Object>>
 
-            allIds.add((Integer)eachCustomer.get("id"));
+        List<Integer> IDS=new ArrayList<>();
+        for (Map<String, Object> eachCustomer : allCustomers) {
+            Object id = eachCustomer.get("id");
+            IDS.add((Integer)id);
         }
-        System.out.println(allIds);
+
+        System.out.println(IDS);
 
         System.out.println("====== PRINT CUSTOMERS Names ======");
 
