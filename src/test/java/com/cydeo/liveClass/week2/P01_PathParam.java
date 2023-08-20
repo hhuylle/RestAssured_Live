@@ -3,6 +3,7 @@ package com.cydeo.liveClass.week2;
 
 import com.cydeo.utility.FruitTestBase;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
@@ -74,6 +75,26 @@ public class P01_PathParam extends FruitTestBase {
                 .pathParam("id", 4).
                 when().get("/products/{id}").prettyPeek();
 
+        JsonPath jp = response.jsonPath();
+
+        //     *     - Status code should be 200
+        Assertions.assertEquals(200,response.statusCode());
+
+        //     *     - Content Type is application/json
+        Assertions.assertEquals(ContentType.JSON.toString(),response.contentType());
+
+
+        //     *     - id is 4
+        int id = jp.getInt("id");
+        Assertions.assertEquals(4,id);
+
+        Assertions.assertEquals(4,jp.getInt("id"));
+
+        //     *     - Name is "Coconut"
+        Assertions.assertEquals("Coconut",jp.getString("name"));
+
+        //     *     - Vendor name is "True Fruits Inc."
+        Assertions.assertEquals("True Fruits Inc.",jp.getString("vendors[0].name"));
 
     }
 }
