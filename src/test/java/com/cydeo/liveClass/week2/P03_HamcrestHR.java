@@ -1,8 +1,12 @@
 package com.cydeo.liveClass.week2;
 
 import com.cydeo.utility.HrTestBase;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
+
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
 public class P03_HamcrestHR extends HrTestBase {
 
     /**
@@ -30,6 +34,15 @@ public class P03_HamcrestHR extends HrTestBase {
 
     @Test
     public void getCountries() {
+
+        given().log().uri().accept(ContentType.JSON)
+                .queryParam("q","{\"region_id\":2}").
+        when().get("/countries").prettyPeek().
+        then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .header("Date",is(notNullValue()));
+
 
     }
 }
