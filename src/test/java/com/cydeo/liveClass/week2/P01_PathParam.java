@@ -120,12 +120,28 @@ public class P01_PathParam extends FruitTestBase {
     public void getSingleProductwithHamCrestPlusJsonPath() {
 
 
-        given().log().uri().accept(ContentType.JSON) // send me data in JSON format
-                .pathParam("id", 4).
-                when().get("/products/{id}").prettyPeek().
-                then()
-                .statusCode(200)
-                .contentType(ContentType.JSON);
+        JsonPath jsonPath = getResponse("/products/{id}", 4);
+
+        Assertions.assertEquals(4,jsonPath.getInt("id"));
+
+        Assertions.assertEquals("Coconut",jsonPath.getString("name"));
+
+        Assertions.assertEquals("True Fruits Inc.",jsonPath.getString("vendors[0].name"));
 
     }
+
+
+    public static JsonPath getResponse(String endpoint,int pathParam){
+
+       return  given().log().uri().accept(ContentType.JSON) // send me data in JSON format
+                .pathParam("id", pathParam).
+                when().get(endpoint).prettyPeek().
+                then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .extract().jsonPath();
+
+    }
+
+
 }
