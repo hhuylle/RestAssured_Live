@@ -11,7 +11,8 @@ public abstract class HrTestBase {
     @BeforeAll
     public static void init(){
 
-        baseURI="http://44.201.221.73:1000/ords/hr";
+        //baseURI="http://44.201.221.73:1000/ords/hr";
+        baseURI="http://54.165.189.254:1000/ords/hr";
 
     }
 
